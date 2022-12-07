@@ -28,12 +28,20 @@
                         "method": "GET"
                     }],
                     "transform_response": [{
-                        "path": "/get",
+                        "path": "/sample",
                         "method": "GET",
                         "template_data": {
                             "input_type": "json",
                             "template_mode": "blob",
                             "template_source": "eyJtZXNzYWdlIjoic2FsYW0ifQo="
+                        }
+                    }, {
+                        "path": "/get",
+                        "method": "GET",
+                        "template_data": {
+                            "input_type": "json",
+                            "template_mode": "file",
+                            "template_source": "./templates/httpmock.json"
                         }
                     }]
                 },
