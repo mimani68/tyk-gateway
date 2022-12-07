@@ -1,0 +1,5603 @@
+{
+	"info": {
+		"_postman_id": "bdc4a42b-cc75-4bd2-a83c-4fbccf1e6e33",
+		"name": "Tyk Gateway v4.1 API Collection",
+		"description": "<img src=\"https://tyk.io/wp-content/uploads/2022/03/Tyk-Postman-tyk-gateway-api-collection_A.png\" alt=\"\">\n\n<img src=\"https://content.pstmn.io/d62ac61b-afb6-4f38-9423-738be2ff41a2/aW1hZ2UucG5n\" alt=\"\" height=\"392\" width=\"946\">\n\nThe Tyk Gateway API is the primary means for integrating your application with the Tyk API Gateway system. This API is very small, and has no granular permissions system. It is intended to be used purely for internal automation and integration.\n\n**Warning: Under no circumstances should outside parties be granted access to this API.**\n\nThe Tyk Gateway API is capable of:\n\n- Managing session objects (key generation)\n- Managing and listing policies\n- Managing and listing API Definitions (only when not using the Dashboard)\n- Hot reloads / reloading a cluster configuration\n- OAuth client creation (only when not using the Dashboard)\n    \n\nIn order to use the Gateway API, you'll need to set the `secret` parameter in your tyk.conf file.\n\nThe shared secret you set should then be sent along as a header with each Gateway API Request in order for it to be successful:\n\n```\nx-tyk-authorization: \n\n```\n\n**The Tyk Gateway API is subsumed by the Tyk Dashboard API in Pro installations.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "0"
+	},
+	"item": [
+		{
+			"name": "tyk",
+			"item": [
+				{
+					"name": "apis",
+					"item": [
+						{
+							"name": "oas",
+							"item": [
+								{
+									"name": "{api ID}",
+									"item": [
+										{
+											"name": "list Api OAS",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/:apiID?mode=public",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														":apiID"
+													],
+													"query": [
+														{
+															"key": "mode",
+															"value": "public",
+															"description": "Mode of OAS get, by default mode could be empty which means to get OAS spec including OAS Tyk extension. \nWhen mode=public, OAS spec excluding Tyk extension will be returned in the response"
+														}
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "Get API definition in OAS format\nOnly if used without the Tyk Dashboard"
+											},
+											"response": [
+												{
+													"name": "API definition",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID?mode=public",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"query": [
+																{
+																	"key": "mode",
+																	"value": "public"
+																}
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"status\": \"ut ipsum eiusmod\",\n  \"message\": \"tempor et officia aliq\",\n  \"schema\": \"aute elit culpa exerci\"\n}"
+												}
+											]
+										},
+										{
+											"name": "update Api OAS",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "Updating an API definition uses the same signature an object as a `POST`, however it will first ensure that the API ID that is being updated is the same as the one in the object being `PUT`.\n\n\nUpdating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live.\n"
+											},
+											"response": [
+												{
+													"name": "API updated",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"status\": \"ok\",\n  \"action\": \"updated\",\n  \"key\": \"{...API JSON definition...}\"\n}"
+												},
+												{
+													"name": "Malformed data",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"status\": \"error\",\n  \"message\": \"Malformed API data\"\n}"
+												}
+											]
+										},
+										{
+											"name": "Patch a single OAS API by ID",
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/:apiID?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&validateRequest=true&allowList=<string>&authentication=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														":apiID"
+													],
+													"query": [
+														{
+															"key": "upstreamURL",
+															"value": "minim dolor",
+															"description": "Upstream URL for the API"
+														},
+														{
+															"key": "listenPath",
+															"value": "minim dolor",
+															"description": "Listen path for the API"
+														},
+														{
+															"key": "customDomain",
+															"value": "minim dolor",
+															"description": "Custom domain for the API"
+														},
+														{
+															"key": "validateRequest",
+															"value": "true",
+															"description": "Enable validateRequest middleware for all endpoints having a request body with media type application/json"
+														},
+														{
+															"key": "allowList",
+															"value": "<string>",
+															"description": "Enable allowList middleware for all endpoints"
+														},
+														{
+															"key": "authentication",
+															"value": "<string>",
+															"description": "Enable or disable authentication in your Tyk Gateway as per your OAS document."
+														}
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "Update API with OAS format. You can use this endpoint to update OAS part of the tyk API definition.\nThis endpoint allows you to configure tyk OAS extension based on query params provided(similar to import)"
+											},
+											"response": [
+												{
+													"name": "API patched",
+													"originalRequest": {
+														"method": "PATCH",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&validateRequest=<string>&allowList=<string>&authentication=<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"query": [
+																{
+																	"key": "upstreamURL",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "listenPath",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "customDomain",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "validateRequest",
+																	"value": "<string>"
+																},
+																{
+																	"key": "allowList",
+																	"value": "<string>"
+																},
+																{
+																	"key": "authentication",
+																	"value": "<string>"
+																}
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"status\": \"ok\",\n  \"action\": \"modified\",\n  \"key\": \"{updated APIID}\"\n}"
+												},
+												{
+													"name": "Bad request",
+													"originalRequest": {
+														"method": "PATCH",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&validateRequest=<string>&allowList=<string>&authentication=<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"query": [
+																{
+																	"key": "upstreamURL",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "listenPath",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "customDomain",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "validateRequest",
+																	"value": "<string>"
+																},
+																{
+																	"key": "allowList",
+																	"value": "<string>"
+																},
+																{
+																	"key": "authentication",
+																	"value": "<string>"
+																}
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"Request malformed\",\n  \"status\": \"error\"\n}"
+												},
+												{
+													"name": "When patch request is send while using dashboard app configs",
+													"originalRequest": {
+														"method": "PATCH",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&validateRequest=<string>&allowList=<string>&authentication=<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"query": [
+																{
+																	"key": "upstreamURL",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "listenPath",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "customDomain",
+																	"value": "minim dolor"
+																},
+																{
+																	"key": "validateRequest",
+																	"value": "<string>"
+																},
+																{
+																	"key": "allowList",
+																	"value": "<string>"
+																},
+																{
+																	"key": "authentication",
+																	"value": "<string>"
+																}
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"summary\": \"dashboard app configs is used for tyk api definitions\",\n  \"value\": {\n    \"message\": \"Due to enabled use_db_app_configs, please use the Dashboard API\",\n    \"status\": \"error\"\n  }\n}"
+												}
+											]
+										},
+										{
+											"name": "delete OAS Api",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint."
+											},
+											"response": [
+												{
+													"name": "API deleted",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"API deleted\",\n  \"status\": \"ok\"\n}"
+												},
+												{
+													"name": "No API ID specified",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"API ID not specified\",\n  \"status\": \"error\"\n}"
+												}
+											]
+										},
+										{
+											"name": "download Api OAS Public",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/:apiID/export?mode=public",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														":apiID",
+														"export"
+													],
+													"query": [
+														{
+															"key": "mode",
+															"value": "public",
+															"description": "Mode of OAS export, by default mode could be empty which means to export OAS spec including OAS Tyk extension. \nWhen mode=public, OAS spec excluding Tyk extension is exported"
+														}
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "Download all OAS format APIs, when used without the Tyk Dashboard."
+											},
+											"response": [
+												{
+													"name": "API definition",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/apis/oas/:apiID/export?mode=public",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"apis",
+																"oas",
+																":apiID",
+																"export"
+															],
+															"query": [
+																{
+																	"key": "mode",
+																	"value": "public"
+																}
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"status\": \"ut ipsum eiusmod\",\n  \"message\": \"tempor et officia aliq\",\n  \"schema\": \"aute elit culpa exerci\"\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "list Apis OAS",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/oas?mode=public",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												"oas"
+											],
+											"query": [
+												{
+													"key": "mode",
+													"value": "public",
+													"description": "Mode of OAS get, by default mode could be empty which means to get OAS spec including OAS Tyk extension. \nWhen mode=public, OAS spec excluding Tyk extension will be returned in the response"
+												}
+											]
+										},
+										"description": "List all OAS format APIs, when used without the Tyk Dashboard."
+									},
+									"response": [
+										{
+											"name": "List of API definitions in OAS format",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas?mode=public",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas"
+													],
+													"query": [
+														{
+															"key": "mode",
+															"value": "public"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"status\": \"in Duis quis in voluptate\",\n    \"message\": \"quis exercitation\",\n    \"schema\": \"sunt laborum elit\"\n  },\n  {\n    \"status\": \"mollit quis\",\n    \"message\": \"anim aute fugiat\",\n    \"schema\": \"qui sit pariatur\"\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "create Api OAS",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/oas",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												"oas"
+											]
+										},
+										"description": "Create API with OAS format\n A single Tyk node can have its API Definitions queried, deleted and updated remotely. This functionality enables you to remotely update your Tyk definitions without having to manage the files manually."
+									},
+									"response": [
+										{
+											"name": "API created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"ok\",\n  \"action\": \"created\",\n  \"key\": \"{...API JSON definition...}\"\n}"
+										},
+										{
+											"name": "Malformed data",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"error\",\n  \"message\": \"Malformed API data\"\n}"
+										}
+									]
+								},
+								{
+									"name": "download Apis OAS Public",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/oas/export?mode=public",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												"oas",
+												"export"
+											],
+											"query": [
+												{
+													"key": "mode",
+													"value": "public",
+													"description": "The mode of OAS export. By default the mode is not set which means the OAS spec is exported including the OAS Tyk extension.  \nIf the mode is set to public, the OAS spec excluding the Tyk extension is exported."
+												}
+											]
+										},
+										"description": "Download all OAS format APIs, when used without the Tyk Dashboard."
+									},
+									"response": [
+										{
+											"name": "API definition",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/export?mode=public",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														"export"
+													],
+													"query": [
+														{
+															"key": "mode",
+															"value": "public"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"status\": \"in Duis quis in voluptate\",\n    \"message\": \"quis exercitation\",\n    \"schema\": \"sunt laborum elit\"\n  },\n  {\n    \"status\": \"mollit quis\",\n    \"message\": \"anim aute fugiat\",\n    \"schema\": \"qui sit pariatur\"\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "import OAS",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/oas/import?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&apiID=minim dolor&allowList=<string>&validateRequest=<string>&authentication=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												"oas",
+												"import"
+											],
+											"query": [
+												{
+													"key": "upstreamURL",
+													"value": "minim dolor",
+													"description": "Upstream URL for the API"
+												},
+												{
+													"key": "listenPath",
+													"value": "minim dolor",
+													"description": "Listen path for the API"
+												},
+												{
+													"key": "customDomain",
+													"value": "minim dolor",
+													"description": "Custom domain for the API"
+												},
+												{
+													"key": "apiID",
+													"value": "minim dolor",
+													"description": "ID of the API"
+												},
+												{
+													"key": "allowList",
+													"value": "<string>",
+													"description": "Enable allowList middleware for all endpoints"
+												},
+												{
+													"key": "validateRequest",
+													"value": "<string>",
+													"description": "Enable validateRequest middleware for all endpoints having a request body with media type application/json"
+												},
+												{
+													"key": "authentication",
+													"value": "<string>",
+													"description": "Enable or disable authentication in your Tyk Gateway as per your OAS document."
+												}
+											]
+										},
+										"description": "Create a new OAS format API, without x-tyk-gateway.\nFor use with an existing OAS API that you want to expose via your Tyk Gateway. (New)"
+									},
+									"response": [
+										{
+											"name": "API definition created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/import?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&apiID=minim dolor&allowList=<string>&validateRequest=<string>&authentication=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														"import"
+													],
+													"query": [
+														{
+															"key": "upstreamURL",
+															"value": "minim dolor"
+														},
+														{
+															"key": "listenPath",
+															"value": "minim dolor"
+														},
+														{
+															"key": "customDomain",
+															"value": "minim dolor"
+														},
+														{
+															"key": "apiID",
+															"value": "minim dolor"
+														},
+														{
+															"key": "allowList",
+															"value": "<string>"
+														},
+														{
+															"key": "validateRequest",
+															"value": "<string>"
+														},
+														{
+															"key": "authentication",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"ok\",\n  \"action\": \"added\",\n  \"key\": \"{created APIID}\"\n}"
+										},
+										{
+											"name": "Bad request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/import?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&apiID=minim dolor&allowList=<string>&validateRequest=<string>&authentication=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														"import"
+													],
+													"query": [
+														{
+															"key": "upstreamURL",
+															"value": "minim dolor"
+														},
+														{
+															"key": "listenPath",
+															"value": "minim dolor"
+														},
+														{
+															"key": "customDomain",
+															"value": "minim dolor"
+														},
+														{
+															"key": "apiID",
+															"value": "minim dolor"
+														},
+														{
+															"key": "allowList",
+															"value": "<string>"
+														},
+														{
+															"key": "validateRequest",
+															"value": "<string>"
+														},
+														{
+															"key": "authentication",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Request malformed\",\n  \"status\": \"error\"\n}"
+										},
+										{
+											"name": "When an import request is sent using your Tyk Dashboard app configs",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"value\": \"reference https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json not found in the OpenAPI spec\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/oas/import?upstreamURL=minim dolor&listenPath=minim dolor&customDomain=minim dolor&apiID=minim dolor&allowList=<string>&validateRequest=<string>&authentication=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														"oas",
+														"import"
+													],
+													"query": [
+														{
+															"key": "upstreamURL",
+															"value": "minim dolor"
+														},
+														{
+															"key": "listenPath",
+															"value": "minim dolor"
+														},
+														{
+															"key": "customDomain",
+															"value": "minim dolor"
+														},
+														{
+															"key": "apiID",
+															"value": "minim dolor"
+														},
+														{
+															"key": "allowList",
+															"value": "<string>"
+														},
+														{
+															"key": "validateRequest",
+															"value": "<string>"
+														},
+														{
+															"key": "authentication",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"summary\": \"Tyk Dashboard app configs are being used for Tyk API definitions\",\n  \"value\": {\n    \"message\": \"Due to enabled use_db_app_configs, please use the Dashboard API\",\n    \"status\": \"error\"\n  }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{api ID}",
+							"item": [
+								{
+									"name": "get Api",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/:apiID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												":apiID"
+											],
+											"variable": [
+												{
+													"key": "apiID",
+													"value": "minim dolor",
+													"description": "(Required) The API ID"
+												}
+											]
+										},
+										"description": "Get API definition\nOnly if used without the Tyk Dashboard"
+									},
+									"response": [
+										{
+											"name": "API definition",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}"
+										}
+									]
+								},
+								{
+									"name": "update Api",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/:apiID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												":apiID"
+											],
+											"variable": [
+												{
+													"key": "apiID",
+													"value": "minim dolor",
+													"description": "(Required) The API ID"
+												}
+											]
+										},
+										"description": "Updating an API definition uses the same signature an object as a `POST`, however it will first ensure that the API ID that is being updated is the same as the one in the object being `PUT`.\n\n\nUpdating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live.\n"
+									},
+									"response": [
+										{
+											"name": "API updated",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"ok\",\n  \"action\": \"updated\",\n  \"key\": \"{...API JSON definition...}\"\n}"
+										},
+										{
+											"name": "Malformed data",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"error\",\n  \"message\": \"Malformed API data\"\n}"
+										}
+									]
+								},
+								{
+									"name": "delete Api",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis/:apiID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis",
+												":apiID"
+											],
+											"variable": [
+												{
+													"key": "apiID",
+													"value": "minim dolor",
+													"description": "(Required) The API ID"
+												}
+											]
+										},
+										"description": "Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint."
+									},
+									"response": [
+										{
+											"name": "API deleted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"API deleted\",\n  \"status\": \"ok\"\n}"
+										},
+										{
+											"name": "No API ID specified",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/apis/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"apis",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"API ID not specified\",\n  \"status\": \"error\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "list Apis",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"apis"
+									]
+								},
+								"description": "List APIs\n Only if used without the Tyk Dashboard"
+							},
+							"response": [
+								{
+									"name": "List of API definitions",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"name\": \"TestAPI\",\n    \"use_keyless\": true,\n    \"active\": true,\n    \"proxy\": {\n      \"listen_path\": \"/test\"\n    }\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "create Api",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"apis"
+									]
+								},
+								"description": "Create API\n A single Tyk node can have its API Definitions queried, deleted and updated remotely. This functionality enables you to remotely update your Tyk definitions without having to manage the files manually."
+							},
+							"response": [
+								{
+									"name": "API created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"status\": \"ok\",\n  \"action\": \"created\",\n  \"key\": \"{...API JSON definition...}\"\n}"
+								},
+								{
+									"name": "Malformed data",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"TestAPI\",\n  \"use_keyless\": true,\n  \"active\": true,\n  \"proxy\": {\n    \"listen_path\": \"/test\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/apis",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"apis"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"status\": \"error\",\n  \"message\": \"Malformed API data\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "reload",
+					"item": [
+						{
+							"name": "Hot-reload a single node",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/reload/?block=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"reload",
+										""
+									],
+									"query": [
+										{
+											"key": "block",
+											"value": "true",
+											"description": "Block a response until the reload is performed. This can be useful in scripting environments like CI/CD workflows."
+										}
+									]
+								},
+								"description": "Tyk is capable of reloading configurations without having to stop serving requests. This means that API configurations can be added at runtime, or even modified at runtime and those rules applied immediately without any downtime."
+							},
+							"response": [
+								{
+									"name": "Reload gateway",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/reload/?block=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"reload",
+												""
+											],
+											"query": [
+												{
+													"key": "block",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"status\": \"ok\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Hot-reload a Tyk group",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/reload/group",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"reload",
+										"group"
+									]
+								},
+								"description": "To reload a whole group of Tyk nodes (without using the Dashboard or host manager). You can send an API request to a single node, this node will then send a notification through the pub/sub infrastructure to all other listening nodes (including the host manager if it is being used to manage NginX) which will then trigger a global reload."
+							},
+							"response": [
+								{
+									"name": "Reload the Tyk Gateway",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/reload/group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"reload",
+												"group"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"status\": \"ok\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "certs",
+					"item": [
+						{
+							"name": "List Certificates",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/certs?org_id=minim dolor&mode=detailed&certID=e6ce2b49-3e31-44de-95a7-12f054724283,234a37ac-28d1-4f12-b936-ffb4211b79f1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"certs"
+									],
+									"query": [
+										{
+											"key": "org_id",
+											"value": "minim dolor",
+											"description": "(Required) Organisation ID to list the certificates"
+										},
+										{
+											"key": "mode",
+											"value": "detailed",
+											"description": "Mode to list the certificate details"
+										},
+										{
+											"key": "certID",
+											"value": "e6ce2b49-3e31-44de-95a7-12f054724283,234a37ac-28d1-4f12-b936-ffb4211b79f1",
+											"description": "Comma separated list of certificates to list"
+										}
+									]
+								},
+								"description": "List All Certificates in the Tyk Gateway"
+							},
+							"response": [
+								{
+									"name": "List of all Certificates",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/certs?org_id=minim dolor&mode=detailed&certID=e6ce2b49-3e31-44de-95a7-12f054724283,234a37ac-28d1-4f12-b936-ffb4211b79f1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"certs"
+											],
+											"query": [
+												{
+													"key": "org_id",
+													"value": "minim dolor"
+												},
+												{
+													"key": "mode",
+													"value": "detailed"
+												},
+												{
+													"key": "certID",
+													"value": "e6ce2b49-3e31-44de-95a7-12f054724283,234a37ac-28d1-4f12-b936-ffb4211b79f1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"certs\": [\n    \"deserunt dolor in irure\",\n    \"elit ullamco laboris enim aliqua\"\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Add a certificate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/plain"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "minim dolor"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/certs?org_id=minim dolor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"certs"
+									],
+									"query": [
+										{
+											"key": "org_id",
+											"value": "minim dolor",
+											"description": "(Required) Organisation ID to list the certificates"
+										}
+									]
+								},
+								"description": "Add a certificate to the Tyk Gateway"
+							},
+							"response": [
+								{
+									"name": "New Key added",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "minim dolor"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/certs?org_id=minim dolor",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"certs"
+											],
+											"query": [
+												{
+													"key": "org_id",
+													"value": "minim dolor"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"e6ce2b49-3e31-44de-95a7-12f054724283\",\n  \"message\": \"Certificate added\",\n  \"status\": \"ok\"\n}"
+								},
+								{
+									"name": "Malformed data",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "minim dolor"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/certs?org_id=minim dolor",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"certs"
+											],
+											"query": [
+												{
+													"key": "org_id",
+													"value": "minim dolor"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Malformed cert data\",\n  \"status\": \"error\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Certificate",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/certs?certID=minim dolor&org_id=minim dolor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"certs"
+									],
+									"query": [
+										{
+											"key": "certID",
+											"value": "minim dolor",
+											"description": "(Required) Certifiicate ID to be deleted"
+										},
+										{
+											"key": "org_id",
+											"value": "minim dolor",
+											"description": "(Required) Organisation ID to list the certificates"
+										}
+									]
+								},
+								"description": "Delete certificate by id"
+							},
+							"response": [
+								{
+									"name": "Deleted certificate",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/certs?certID=minim dolor&org_id=minim dolor",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"certs"
+											],
+											"query": [
+												{
+													"key": "certID",
+													"value": "minim dolor"
+												},
+												{
+													"key": "org_id",
+													"value": "minim dolor"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"removed\",\n  \"status\": \"ok\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "keys",
+					"item": [
+						{
+							"name": "{key ID}",
+							"item": [
+								{
+									"name": "Get a Key",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys/:keyID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys",
+												":keyID"
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "Get session info about the specified key. Should return up to date rate limit and quota usage numbers."
+									},
+									"response": [
+										{
+											"name": "Key object",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/keys/:keyID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"keys",
+														":keyID"
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update Key",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys/:keyID?suppress_reset=1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys",
+												":keyID"
+											],
+											"query": [
+												{
+													"key": "suppress_reset",
+													"value": "1",
+													"description": "Adding the suppress_reset parameter and setting it to 1, will cause Tyk not to reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when adding a key. Adding the `suppress_reset` flag to the URL parameters will avoid this behaviour."
+												}
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "You can also manually add keys to Tyk using your own key-generation algorithm. It is recommended if using this approach to ensure that the OrgID being used in the API Definition and the key data is blank so that Tyk does not try to prepend or manage the key in any way."
+									},
+									"response": [
+										{
+											"name": "Key updated",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/keys/:keyID?suppress_reset=1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"keys",
+														":keyID"
+													],
+													"query": [
+														{
+															"key": "suppress_reset",
+															"value": "1"
+														}
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"updated\",\n  \"status\": \"ok\"\n}"
+										},
+										{
+											"name": "No or incorrect Key ID specified",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/keys/:keyID?suppress_reset=1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"keys",
+														":keyID"
+													],
+													"query": [
+														{
+															"key": "suppress_reset",
+															"value": "1"
+														}
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Key ID not specified\",\n  \"status\": \"error\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Create Custom Key / Import Key",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys/:keyID?suppress_reset=1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys",
+												":keyID"
+											],
+											"query": [
+												{
+													"key": "suppress_reset",
+													"value": "1",
+													"description": "Adding the suppress_reset parameter and setting it to 1, will cause Tyk not to reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when adding a key. Adding the `suppress_reset` flag to the URL parameters will avoid this behaviour."
+												}
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "You can use the `POST /tyk/keys/{KEY_ID}` endpoint as defined below to import existing keys into Tyk.\n\nThis example uses standard `authorization` header authentication, and assumes that the Gateway is located at `127.0.0.1:8080` and the Tyk secret is `352d20ee67be67f6340b4c0605b044b7` - update these as necessary to match your environment.\n\nTo import a key called `mycustomkey`, save the JSON contents as `token.json` (see example below), then run the following Curl command.\n\n```\ncurl http://127.0.0.1:8080/tyk/keys/mycustomkey -H 'x-tyk-authorization: 352d20ee67be67f6340b4c0605b044b7' -H 'Content-Type: application/json'  -d @token.json\n```\n\nThe following request will fail as the key doesn't exist.\n\n```\ncurl http://127.0.0.1:8080/quickstart/headers -H 'Authorization. invalid123'\n```\n\nBut this request will now work, using the imported key.\n\n```\ncurl http://127.0.0.1:8080/quickstart/headers -H 'Authorization: mycustomkey'\n```\n\n<h4>Example token.json file<h4>\n\n```\n{\n  \"allowance\": 1000,\n  \"rate\": 1000,\n  \"per\": 60,\n  \"expires\": -1,\n  \"quota_max\": -1,\n  \"quota_renews\": 1406121006,\n  \"quota_remaining\": 0,\n  \"quota_renewal_rate\": 60,\n  \"access_rights\": {\n    \"3\": {\n      \"api_name\": \"Tyk Test API\",\n      \"api_id\": \"3\"\n    }\n  },\n  \"org_id\": \"53ac07777cbb8c2d53000002\",\n  \"basic_auth_data\": {\n    \"password\": \"\",\n    \"hash_type\": \"\"\n  },\n  \"hmac_enabled\": false,\n  \"hmac_string\": \"\",\n  \"is_inactive\": false,\n  \"apply_policy_id\": \"\",\n  \"apply_policies\": [\n    \"59672779fa4387000129507d\",\n    \"53222349fa4387004324324e\",\n    \"543534s9fa4387004324324d\"\n    ],\n  \"monitor\": {\n    \"trigger_limits\": []\n  }\n}\n```"
+									},
+									"response": [
+										{
+											"name": "Key updated",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/keys/:keyID?suppress_reset=1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"keys",
+														":keyID"
+													],
+													"query": [
+														{
+															"key": "suppress_reset",
+															"value": "1"
+														}
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"updated\",\n  \"status\": \"ok\"\n}"
+										},
+										{
+											"name": "No or incorrect Key ID specified",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/keys/:keyID?suppress_reset=1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"keys",
+														":keyID"
+													],
+													"query": [
+														{
+															"key": "suppress_reset",
+															"value": "1"
+														}
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Key ID not specified\",\n  \"status\": \"error\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete Key",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys/:keyID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys",
+												":keyID"
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "Deleting a key will remove it permanently from the system, however analytics relating to that key will still be available."
+									},
+									"response": [
+										{
+											"name": "Key deleted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/keys/:keyID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"keys",
+														":keyID"
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"Key deleted\",\n  \"status\": \"ok\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "List Keys",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/keys",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"keys"
+									]
+								},
+								"description": "You can retrieve all the keys in your Tyk instance. Returns an array of Key IDs."
+							},
+							"response": [
+								{
+									"name": "List of all API keys",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"keys\": [\n    \"fugiat magna deserunt\",\n    \"in sunt sit esse ut\"\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Create a key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/keys",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"keys"
+									]
+								},
+								"description": "Tyk will generate the access token based on the OrgID specified in the API Definition and a random UUID. This ensures that keys can be \"owned\" by different API Owners should segmentation be needed at an organisational level.\n<br/><br/>\nAPI keys without access_rights data will be written to all APIs on the system (this also means that they will be created across all SessionHandlers and StorageHandlers, it is recommended to always embed access_rights data in a key to ensure that only targeted APIs and their back-ends are written to."
+							},
+							"response": [
+								{
+									"name": "New Key added",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"action\": \"created\",\n  \"key\": \"{...KEY JSON definition...}\",\n  \"status\": \"ok\"\n}"
+								},
+								{
+									"name": "Malformed data",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/keys",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"keys"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Malformed Key data\",\n  \"status\": \"error\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "policies",
+					"item": [
+						{
+							"name": "{pol ID}",
+							"item": [
+								{
+									"name": "Get a Policy",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies/:polID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies",
+												":polID"
+											],
+											"variable": [
+												{
+													"key": "polID",
+													"value": "minim dolor",
+													"description": "(Required) The policy ID"
+												}
+											]
+										},
+										"description": "You can retrieve details of a single policy by ID in your Tyk instance. Returns an array policies."
+									},
+									"response": [
+										{
+											"name": "Get details of a single Policy",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"_id\": \"pariatur magna ut ip\",\n  \"id\": \"m\",\n  \"name\": \"pariatur sint Lorem nulla\",\n  \"org_id\": \"sunt incididunt laborum cillum\",\n  \"rate\": 93801476.63603693,\n  \"per\": 36973245.37166482,\n  \"quota_max\": 74916913,\n  \"quota_renewal_rate\": -55683965,\n  \"throttle_interval\": 41029457.57407856,\n  \"throttle_retry_limit\": 60134393.83803645,\n  \"max_query_depth\": 72862413.34966874,\n  \"access_rights\": {\n    \"allowed_urls\": [\n      {\n        \"methods\": [\n          \"voluptate id ad aliqua\",\n          \"labore Duis\"\n        ],\n        \"url\": \"enim proident\"\n      },\n      {\n        \"methods\": [\n          \"ul\",\n          \"qui officia exercitation ipsum\"\n        ],\n        \"url\": \"exercitatio\"\n      }\n    ],\n    \"api_id\": \"ex pariatur enim labore\",\n    \"api_name\": \"adipisicing id anim sed\",\n    \"limit\": {\n      \"per\": -10601829.732946217,\n      \"quota_max\": -59186673,\n      \"quota_remaining\": 47331442,\n      \"quota_renewal_rate\": -14818355,\n      \"quota_renews\": -86624603,\n      \"rate\": -89882251.69462506,\n      \"set_by_policy\": false,\n      \"throttle_interval\": -88820690.97262107,\n      \"throttle_retry_limit\": 16074159\n    },\n    \"versions\": [\n      \"officia dolor\",\n      \"est Excepteur\"\n    ]\n  },\n  \"hmac_enabled\": true,\n  \"enable_http_signature_validation\": true,\n  \"active\": true,\n  \"is_inactive\": false,\n  \"tags\": [\n    \"ut Lorem\",\n    \"exercitation nulla do\"\n  ],\n  \"key_expires_in\": 9111279.836396635,\n  \"partitions\": {\n    \"quota\": true,\n    \"rate_limit\": false,\n    \"complexity\": true,\n    \"acl\": false,\n    \"per_api\": true\n  },\n  \"last_updated\": \"ut occaecat amet et\",\n  \"meta_data\": {},\n  \"graphql_access_rights\": {}\n}"
+										},
+										{
+											"name": "Policy not found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Policy not found\",\n  \"status\": \"error\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update a Policy",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies/:polID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies",
+												":polID"
+											],
+											"variable": [
+												{
+													"key": "polID",
+													"value": "minim dolor",
+													"description": "(Required) The policy ID"
+												}
+											]
+										},
+										"description": "You can update a Policy in your Tyk Instance by ID"
+									},
+									"response": [
+										{
+											"name": "Policy updated",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"updated\",\n  \"status\": \"ok\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"PUT operation on different IDs\",\n  \"status\": \"error\"\n}"
+										},
+										{
+											"name": "Internal server error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Failed to create file!\",\n  \"status\": \"error\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete a Policy",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies/:polID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies",
+												":polID"
+											],
+											"variable": [
+												{
+													"key": "polID",
+													"value": "minim dolor",
+													"description": "(Required) The policy ID"
+												}
+											]
+										},
+										"description": "Delete a policy by ID in your Tyk instance."
+									},
+									"response": [
+										{
+											"name": "Delete policy by ID",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"deleted\",\n  \"status\": \"ok\"\n}"
+										},
+										{
+											"name": "Internal server error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/policies/:polID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"policies",
+														":polID"
+													],
+													"variable": [
+														{
+															"key": "polID",
+															"value": "minim dolor",
+															"description": "(Required) The policy ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Delete failed\",\n  \"status\": \"error\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "List Policies",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/policies",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"policies"
+									]
+								},
+								"description": "You can retrieve all the policies in your Tyk instance. Returns an array policies."
+							},
+							"response": [
+								{
+									"name": "List of all policies",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"_id\": \"incididunt\",\n    \"id\": \"consequat nulla in eiusmod sit\",\n    \"name\": \"quis nulla Lorem\",\n    \"org_id\": \"reprehenderit al\",\n    \"rate\": 64274758.715670645,\n    \"per\": -6949870.14200379,\n    \"quota_max\": 20911198,\n    \"quota_renewal_rate\": 8264128,\n    \"throttle_interval\": -32825329.742717817,\n    \"throttle_retry_limit\": -49586791.85243624,\n    \"max_query_depth\": -30866483.623128578,\n    \"access_rights\": {\n      \"allowed_urls\": [\n        {\n          \"methods\": [\n            \"eu ipsum\",\n            \"occaecat eiusmod\"\n          ],\n          \"url\": \"ullamco ut cillum proident labore\"\n        },\n        {\n          \"methods\": [\n            \"veniam velit Lorem\",\n            \"officia non consectetur\"\n          ],\n          \"url\": \"do\"\n        }\n      ],\n      \"api_id\": \"non sed consectetur ad ea\",\n      \"api_name\": \"sit exercitation Duis amet\",\n      \"limit\": {\n        \"per\": -69670848.91195866,\n        \"quota_max\": -69856206,\n        \"quota_remaining\": -67278153,\n        \"quota_renewal_rate\": -51724540,\n        \"quota_renews\": 88319959,\n        \"rate\": -38423094.622215405,\n        \"set_by_policy\": true,\n        \"throttle_interval\": 4549310.113952249,\n        \"throttle_retry_limit\": -74182632\n      },\n      \"versions\": [\n        \"irure dolore\",\n        \"nostrud dolore nisi enim\"\n      ]\n    },\n    \"hmac_enabled\": true,\n    \"enable_http_signature_validation\": true,\n    \"active\": true,\n    \"is_inactive\": false,\n    \"tags\": [\n      \"amet eiusmod sit enim\",\n      \"cupidatat laborum eu tempor in\"\n    ],\n    \"key_expires_in\": -99713319.83792351,\n    \"partitions\": {\n      \"quota\": false,\n      \"rate_limit\": false,\n      \"complexity\": true,\n      \"acl\": true,\n      \"per_api\": false\n    },\n    \"last_updated\": \"id\",\n    \"meta_data\": {},\n    \"graphql_access_rights\": {}\n  },\n  {\n    \"_id\": \"Ut sint officia\",\n    \"id\": \"est commodo\",\n    \"name\": \"voluptate incididunt occaecat\",\n    \"org_id\": \"do enim q\",\n    \"rate\": -57093277.66549186,\n    \"per\": -75031054.12185054,\n    \"quota_max\": -77771967,\n    \"quota_renewal_rate\": -40072945,\n    \"throttle_interval\": -74803546.80679917,\n    \"throttle_retry_limit\": -22342865.48544389,\n    \"max_query_depth\": 85071018.84644207,\n    \"access_rights\": {\n      \"allowed_urls\": [\n        {\n          \"methods\": [\n            \"ad qui\",\n            \"aute\"\n          ],\n          \"url\": \"quis\"\n        },\n        {\n          \"methods\": [\n            \"eu aute aliquip enim\",\n            \"Duis en\"\n          ],\n          \"url\": \"fugiat elit et laborum\"\n        }\n      ],\n      \"api_id\": \"ipsum in\",\n      \"api_name\": \"cillum est ut officia\",\n      \"limit\": {\n        \"per\": 19917549.545680076,\n        \"quota_max\": 46930902,\n        \"quota_remaining\": 31540929,\n        \"quota_renewal_rate\": 55715575,\n        \"quota_renews\": -91317681,\n        \"rate\": 72849929.58477452,\n        \"set_by_policy\": false,\n        \"throttle_interval\": 84322694.11497498,\n        \"throttle_retry_limit\": -76805654\n      },\n      \"versions\": [\n        \"aliquip pariatur et ullamco\",\n        \"dolore mini\"\n      ]\n    },\n    \"hmac_enabled\": true,\n    \"enable_http_signature_validation\": true,\n    \"active\": false,\n    \"is_inactive\": true,\n    \"tags\": [\n      \"ex\",\n      \"fugiat do eu anim\"\n    ],\n    \"key_expires_in\": -22573076.74683693,\n    \"partitions\": {\n      \"quota\": false,\n      \"rate_limit\": false,\n      \"complexity\": true,\n      \"acl\": true,\n      \"per_api\": false\n    },\n    \"last_updated\": \"laboru\",\n    \"meta_data\": {},\n    \"graphql_access_rights\": {}\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create a Policy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/policies",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"policies"
+									]
+								},
+								"description": "You can create a Policy in your Tyk Instance"
+							},
+							"response": [
+								{
+									"name": "Policy created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"action\": \"created\",\n  \"status\": \"ok\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Request malformed\",\n  \"status\": \"error\"\n}"
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"new policy\",\n  \"quota_max\": 60,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/policies",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"policies"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Failed to create file!\",\n  \"status\": \"error\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "oauth",
+					"item": [
+						{
+							"name": "clients",
+							"item": [
+								{
+									"name": "{api ID}",
+									"item": [
+										{
+											"name": "{key Name}",
+											"item": [
+												{
+													"name": "Get OAuth client",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID/:keyName",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"oauth",
+																"clients",
+																":apiID",
+																":keyName"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "Ut ullamco officia",
+																	"description": "(Required) The API ID"
+																},
+																{
+																	"key": "keyName",
+																	"value": "minim dolor",
+																	"description": "(Required) The Client ID"
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"name": "Get OAuth client details or a list of OAuth clients",
+															"originalRequest": {
+																"method": "GET",
+																"header": [
+																	{
+																		"description": "Added as a part of security scheme: apikey",
+																		"key": "X-Tyk-Authorization",
+																		"value": "<API Key>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID/:keyName",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"tyk",
+																		"oauth",
+																		"clients",
+																		":apiID",
+																		":keyName"
+																	],
+																	"variable": [
+																		{
+																			"key": "apiID",
+																			"value": "Ut ullamco officia",
+																			"description": "(Required) The API ID"
+																		},
+																		{
+																			"key": "keyName",
+																			"value": "minim dolor",
+																			"description": "(Required) The Client ID"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"client_id\": \"test\",\n  \"api_id\": \"id\",\n  \"policy_id\": \"policy\"\n}"
+														}
+													]
+												},
+												{
+													"name": "Delete OAuth client",
+													"request": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID/:keyName",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"oauth",
+																"clients",
+																":apiID",
+																":keyName"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "Ut ullamco officia",
+																	"description": "(Required) The API ID"
+																},
+																{
+																	"key": "keyName",
+																	"value": "minim dolor",
+																	"description": "(Required) The Client ID"
+																}
+															]
+														},
+														"description": "Please note that tokens issued with the client ID will still be valid until they expire."
+													},
+													"response": [
+														{
+															"name": "OAuth client deleted",
+															"originalRequest": {
+																"method": "DELETE",
+																"header": [
+																	{
+																		"description": "Added as a part of security scheme: apikey",
+																		"key": "X-Tyk-Authorization",
+																		"value": "<API Key>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID/:keyName",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"tyk",
+																		"oauth",
+																		"clients",
+																		":apiID",
+																		":keyName"
+																	],
+																	"variable": [
+																		{
+																			"key": "apiID",
+																			"value": "Ut ullamco officia",
+																			"description": "(Required) The API ID"
+																		},
+																		{
+																			"key": "keyName",
+																			"value": "minim dolor",
+																			"description": "(Required) The Client ID"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"action\": \"deleted\",\n  \"status\": \"ok\"\n}"
+														}
+													]
+												},
+												{
+													"name": "List tokens",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID/:keyName/tokens",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"oauth",
+																"clients",
+																":apiID",
+																":keyName",
+																"tokens"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "Ut ullamco officia",
+																	"description": "(Required) The API ID"
+																},
+																{
+																	"key": "keyName",
+																	"value": "minim dolor",
+																	"description": "(Required) The Client ID"
+																}
+															]
+														},
+														"description": "This endpoint allows you to retrieve a list of all current tokens and their expiry date for a provided API ID and OAuth-client ID in the following format. This endpoint will work only for newly created tokens. <br/> <br/> You can control how long you want to store expired tokens in this list using `oauth_token_expired_retain_period` gateway option, which specifies retain period for expired tokens stored in Redis. By default expired token not get removed. See <a href=\"https://tyk.io/docs/configure/tyk-gateway-configuration-options/#a-name-oauth-token-expired-retain-period-a-oauth-token-expired-retain-period\" target=\"_blank\">here</a> for more details."
+													},
+													"response": [
+														{
+															"name": "Get a list of tokens",
+															"originalRequest": {
+																"method": "GET",
+																"header": [
+																	{
+																		"description": "Added as a part of security scheme: apikey",
+																		"key": "X-Tyk-Authorization",
+																		"value": "<API Key>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID/:keyName/tokens",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"tyk",
+																		"oauth",
+																		"clients",
+																		":apiID",
+																		":keyName",
+																		"tokens"
+																	],
+																	"variable": [
+																		{
+																			"key": "apiID",
+																			"value": "Ut ullamco officia",
+																			"description": "(Required) The API ID"
+																		},
+																		{
+																			"key": "keyName",
+																			"value": "minim dolor",
+																			"description": "(Required) The Client ID"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "[\n  \"tok1\",\n  \"tok2\"\n]"
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "Update OAuth metadata and Policy ID",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"oauth",
+														"clients",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "Allows you to update the metadata and Policy ID for an OAuth client."
+											},
+											"response": [
+												{
+													"name": "OAuth client metadata updated",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"oauth",
+																"clients",
+																":apiID"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"api_id\": \"sit esse\",\n    \"client_id\": \"irure elit laboris\",\n    \"description\": \"non sit ut sunt\",\n    \"meta_data\": {},\n    \"policy_id\": \"ea id et commodo\",\n    \"redirect_uri\": \"ut labore elit\",\n    \"secret\": \"Duis deserunt incididunt quis cillum\"\n  },\n  {\n    \"api_id\": \"in consequat labore\",\n    \"client_id\": \"Lorem\",\n    \"description\": \"in consequat\",\n    \"meta_data\": {},\n    \"policy_id\": \"aliquip Ut\",\n    \"redirect_uri\": \"in enim amet est\",\n    \"secret\": \"consect\"\n  }\n]"
+												}
+											]
+										},
+										{
+											"name": "List oAuth clients",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"oauth",
+														"clients",
+														":apiID"
+													],
+													"variable": [
+														{
+															"key": "apiID",
+															"value": "minim dolor",
+															"description": "(Required) The API ID"
+														}
+													]
+												},
+												"description": "OAuth Clients are organised by API ID, and therefore are queried as such."
+											},
+											"response": [
+												{
+													"name": "Get OAuth client details or a list of OAuth clients",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: apikey",
+																"key": "X-Tyk-Authorization",
+																"value": "<API Key>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/tyk/oauth/clients/:apiID",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"tyk",
+																"oauth",
+																"clients",
+																":apiID"
+															],
+															"variable": [
+																{
+																	"key": "apiID",
+																	"value": "minim dolor",
+																	"description": "(Required) The API ID"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"api_id\": \"sit esse\",\n    \"client_id\": \"irure elit laboris\",\n    \"description\": \"non sit ut sunt\",\n    \"meta_data\": {},\n    \"policy_id\": \"ea id et commodo\",\n    \"redirect_uri\": \"ut labore elit\",\n    \"secret\": \"Duis deserunt incididunt quis cillum\"\n  },\n  {\n    \"api_id\": \"in consequat labore\",\n    \"client_id\": \"Lorem\",\n    \"description\": \"in consequat\",\n    \"meta_data\": {},\n    \"policy_id\": \"aliquip Ut\",\n    \"redirect_uri\": \"in enim amet est\",\n    \"secret\": \"consect\"\n  }\n]"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Create new OAuth client",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"client_id\": \"test\",\n  \"api_id\": \"id\",\n  \"policy_id\": \"policy\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/clients/create",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"clients",
+												"create"
+											]
+										},
+										"description": "Any OAuth keys must be generated with the help of a client ID. These need to be pre-registered with Tyk before they can be used (in a similar vein to how you would register your app with Twitter before attempting to ask user permissions using their API). <br/><br/> <h3>Creating OAuth clients with Access to Multiple APIs</h3> New from Tyk Gateway 2.6.0 is the ability to create OAuth clients with access to more than one API. If you provide the api_id it works the same as in previous releases. If you don't provide the api_id the request uses policy access rights and enumerates APIs from their setting in the newly created OAuth-client."
+									},
+									"response": [
+										{
+											"name": "Client created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"client_id\": \"test\",\n  \"api_id\": \"id\",\n  \"policy_id\": \"policy\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/oauth/clients/create",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"oauth",
+														"clients",
+														"create"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"client_id\": \"test\",\n  \"api_id\": \"id\",\n  \"policy_id\": \"policy\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "revoke token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJvcmciOiI1ZTIwOTFjNGQ0YWVmY2U2MGMwNGZiOTIiLCJpZCI6ImJlMjlhYjVkODc1OTRhZDJhYTBhNjAwNzFlNzE1ZmQxIiwiaCI6Im11cm11cjY0In0=",
+											"description": "token to be revoked"
+										},
+										{
+											"key": "client_id",
+											"value": "411f0800957c4a3e81fe181141dbc22a",
+											"description": "id of oauth client"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/oauth/revoke",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"oauth",
+										"revoke"
+									]
+								},
+								"description": "revoke a single token"
+							},
+							"response": [
+								{
+									"name": "Succesful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "token",
+													"value": "eyJvcmciOiI1ZTIwOTFjNGQ0YWVmY2U2MGMwNGZiOTIiLCJpZCI6ImJlMjlhYjVkODc1OTRhZDJhYTBhNjAwNzFlNzE1ZmQxIiwiaCI6Im11cm11cjY0In0=",
+													"description": "token to be revoked"
+												},
+												{
+													"key": "client_id",
+													"value": "411f0800957c4a3e81fe181141dbc22a",
+													"description": "id of oauth client"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/revoke",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"revoke"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "revoke all client's tokens",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "411f0800957c4a3e81fe181141dbc22a",
+											"description": "id of oauth client"
+										},
+										{
+											"key": "client_secret",
+											"value": "N2Y0YjgzMjctMTEwNi00YWExLWJjM2MtYjg1NWZhM2M1NmNj",
+											"description": "OAuth client secret to ensure that its a valid operation"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/oauth/revoke_all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"oauth",
+										"revoke_all"
+									]
+								},
+								"description": "revoke all the tokens for a given oauth client"
+							},
+							"response": [
+								{
+									"name": "Succesful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "client_id",
+													"value": "411f0800957c4a3e81fe181141dbc22a",
+													"description": "id of oauth client"
+												},
+												{
+													"key": "client_secret",
+													"value": "N2Y0YjgzMjctMTEwNi00YWExLWJjM2MtYjg1NWZhM2M1NmNj",
+													"description": "OAuth client secret to ensure that its a valid operation"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/revoke_all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"revoke_all"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad request, form malformed or client secret and client id doesn't match",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "client_id",
+													"value": "411f0800957c4a3e81fe181141dbc22a",
+													"description": "id of oauth client"
+												},
+												{
+													"key": "client_secret",
+													"value": "N2Y0YjgzMjctMTEwNi00YWExLWJjM2MtYjg1NWZhM2M1NmNj",
+													"description": "OAuth client secret to ensure that its a valid operation"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/revoke_all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"revoke_all"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "oauth client doesn't have any api related",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "client_id",
+													"value": "411f0800957c4a3e81fe181141dbc22a",
+													"description": "id of oauth client"
+												},
+												{
+													"key": "client_secret",
+													"value": "N2Y0YjgzMjctMTEwNi00YWExLWJjM2MtYjg1NWZhM2M1NmNj",
+													"description": "OAuth client secret to ensure that its a valid operation"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/revoke_all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"revoke_all"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Invalidate OAuth refresh token",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/oauth/refresh/:keyName?api_id=minim dolor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"oauth",
+										"refresh",
+										":keyName"
+									],
+									"query": [
+										{
+											"key": "api_id",
+											"value": "minim dolor",
+											"description": "(Required) The API id"
+										}
+									],
+									"variable": [
+										{
+											"key": "keyName",
+											"value": "minim dolor",
+											"description": "(Required) Refresh token"
+										}
+									]
+								},
+								"description": "It is possible to invalidate refresh tokens in order to manage OAuth client access more robustly."
+							},
+							"response": [
+								{
+									"name": "Deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/refresh/:keyName?api_id=minim dolor",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"refresh",
+												":keyName"
+											],
+											"query": [
+												{
+													"key": "api_id",
+													"value": "minim dolor"
+												}
+											],
+											"variable": [
+												{
+													"key": "keyName",
+													"value": "minim dolor",
+													"description": "(Required) Refresh token"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"action\": \"aliqua\",\n  \"key\": \"labore sint dolore\",\n  \"key_hash\": \"reprehenderit sint velit\",\n  \"status\": \"sed fugiat ad\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Authorize client",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "response_type",
+											"value": "code",
+											"description": "Should be provided by requesting client as part of authorisation request, this should be either `code` or `token` depending on the methods you have specified for the API."
+										},
+										{
+											"key": "client_id",
+											"value": "21e2baf424674f6461faca6d45285bbb",
+											"description": "Should be provided by requesting client as part of authorisation request. The Client ID that is making the request."
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http%3A%2F%2Foauth.com%2Fredirect",
+											"description": "Should be provided by requesting client as part of authorisation request. Must match with the record stored with Tyk."
+										},
+										{
+											"key": "key_rules",
+											"value": "%7B+++++%22allowance%22%3A+999%2C+++++%22rate%22%3A+1000%2C+++++%22per%22%3A+60%2C+++++%22expires%22%3A+0%2C+++++%22quota_max%22%3A+-1%2C+++++%22quota_renews%22%3A+1406121006%2C+++++%22quota_remaining%22%3A+0%2C+++++%22quota_renewal_rate%22%3A+60%2C+++++%22access_rights%22%3A+%7B+++++++++%22528a67c1ac9940964f9a41ae79235fcc%22%3A+%7B+++++++++++++%22api_name%22%3A+%22OAuth+Test+API%22%2C+++++++++++++%22api_id%22%3A+%22528a67c1ac9940964f9a41ae79235fcc%22%2C+++++++++++++%22versions%22%3A+%5B+++++++++++++++++%22Default%22+++++++++++++%5D+++++++++%7D+++++%7D%2C+++++%22org_id%22%3A+%2253ac07777cbb8c2d53000002%22+%7D",
+											"description": "A string representation of a Session Object (form-encoded). This should be provided by your application in order to apply any quotas or rules to the key."
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tyk/oauth/authorize-client/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"oauth",
+										"authorize-client",
+										""
+									]
+								},
+								"description": "With the OAuth flow you will need to create authorisation or access tokens for your clients, in order to do this, Tyk provides a private API endpoint for your application to generate these codes and redirect the end-user back to the API Client."
+							},
+							"response": [
+								{
+									"name": "Succesful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "response_type",
+													"value": "code",
+													"description": "Should be provided by requesting client as part of authorisation request, this should be either `code` or `token` depending on the methods you have specified for the API."
+												},
+												{
+													"key": "client_id",
+													"value": "21e2baf424674f6461faca6d45285bbb",
+													"description": "Should be provided by requesting client as part of authorisation request. The Client ID that is making the request."
+												},
+												{
+													"key": "redirect_uri",
+													"value": "http%3A%2F%2Foauth.com%2Fredirect",
+													"description": "Should be provided by requesting client as part of authorisation request. Must match with the record stored with Tyk."
+												},
+												{
+													"key": "key_rules",
+													"value": "%7B+++++%22allowance%22%3A+999%2C+++++%22rate%22%3A+1000%2C+++++%22per%22%3A+60%2C+++++%22expires%22%3A+0%2C+++++%22quota_max%22%3A+-1%2C+++++%22quota_renews%22%3A+1406121006%2C+++++%22quota_remaining%22%3A+0%2C+++++%22quota_renewal_rate%22%3A+60%2C+++++%22access_rights%22%3A+%7B+++++++++%22528a67c1ac9940964f9a41ae79235fcc%22%3A+%7B+++++++++++++%22api_name%22%3A+%22OAuth+Test+API%22%2C+++++++++++++%22api_id%22%3A+%22528a67c1ac9940964f9a41ae79235fcc%22%2C+++++++++++++%22versions%22%3A+%5B+++++++++++++++++%22Default%22+++++++++++++%5D+++++++++%7D+++++%7D%2C+++++%22org_id%22%3A+%2253ac07777cbb8c2d53000002%22+%7D",
+													"description": "A string representation of a Session Object (form-encoded). This should be provided by your application in order to apply any quotas or rules to the key."
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/oauth/authorize-client/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"oauth",
+												"authorize-client",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"code\": \"MWY0ZDRkMzktOTYwNi00NDRiLTk2YmQtOWQxOGQ3Mjc5Yzdk\",\n  \"redirect_to\": \"http://client-app.com/oauth-redirect/?code=MWY0ZDRkMzktOTYwNi00NDRiLTk2YmQtOWQxOGQ3Mjc5Yzdk\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "org/keys",
+					"item": [
+						{
+							"name": "{key ID}",
+							"item": [
+								{
+									"name": "Get an Organisation Key",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/org/keys/:keyID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"org",
+												"keys",
+												":keyID"
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "Get session info about specified orgnanisation key. Should return up to date rate limit and quota usage numbers."
+									},
+									"response": [
+										{
+											"name": "Key object",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/org/keys/:keyID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"org",
+														"keys",
+														":keyID"
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"tags\": [\n    \"Duis sed quis\",\n    \"sunt nulla mollit id\"\n  ],\n  \"access_rights\": {\n    \"voluptate_9\": {\n      \"allowed_urls\": [\n        {\n          \"methods\": [\n            \"Excepteur ipsum officia\",\n            \"adip\"\n          ],\n          \"url\": \"incididunt mollit\"\n        },\n        {\n          \"methods\": [\n            \"proident sint qui\",\n            \"magna enim\"\n          ],\n          \"url\": \"sed voluptate\"\n        }\n      ],\n      \"api_id\": \"velit cillum\",\n      \"api_name\": \"commodo\",\n      \"limit\": {\n        \"per\": 74622670.22761372,\n        \"quota_max\": 33765911,\n        \"quota_remaining\": -49947642,\n        \"quota_renewal_rate\": 94686831,\n        \"quota_renews\": 10083380,\n        \"rate\": 81485630.19250461,\n        \"set_by_policy\": true,\n        \"throttle_interval\": 5379541.621972412,\n        \"throttle_retry_limit\": 71488417\n      },\n      \"versions\": [\n        \"Excepteur in minim occaecat\",\n        \"dolor commodo dolore id incididunt\"\n      ]\n    },\n    \"Lorem_ea\": {\n      \"allowed_urls\": [\n        {\n          \"methods\": [\n            \"exercitation cupidatat\",\n            \"dolor consequat dolor Ut\"\n          ],\n          \"url\": \"in fugiat\"\n        },\n        {\n          \"methods\": [\n            \"aliquip adipisicing minim Lorem\",\n            \"non laborum est\"\n          ],\n          \"url\": \"amet\"\n        }\n      ],\n      \"api_id\": \"esse in fugiat\",\n      \"api_name\": \"cupidatat qui\",\n      \"limit\": {\n        \"per\": 51494055.58191115,\n        \"quota_max\": -76585877,\n        \"quota_remaining\": 62658060,\n        \"quota_renewal_rate\": 60245774,\n        \"quota_renews\": -47763999,\n        \"rate\": -6918718.53820838,\n        \"set_by_policy\": false,\n        \"throttle_interval\": 68964314.86201212,\n        \"throttle_retry_limit\": -47568444\n      },\n      \"versions\": [\n        \"do mollit cillum Lorem dolore\",\n        \"labore Duis Ut commodo\"\n      ]\n    },\n    \"reprehenderit__b9\": {\n      \"allowed_urls\": [\n        {\n          \"methods\": [\n            \"in Excepteur magna dolor\",\n            \"nisi anim dolor aliquip\"\n          ],\n          \"url\": \"elit pariatur\"\n        },\n        {\n          \"methods\": [\n            \"irure do sint\",\n            \"reprehenderit aute in\"\n          ],\n          \"url\": \"nisi do sit\"\n        }\n      ],\n      \"api_id\": \"non ex anim\",\n      \"api_name\": \"mollit et in\",\n      \"limit\": {\n        \"per\": -87241738.06558561,\n        \"quota_max\": 97997886,\n        \"quota_remaining\": 83448789,\n        \"quota_renewal_rate\": 89313873,\n        \"quota_renews\": -96830838,\n        \"rate\": 83134356.90382466,\n        \"set_by_policy\": true,\n        \"throttle_interval\": 6693412.529229596,\n        \"throttle_retry_limit\": -60082064\n      },\n      \"versions\": [\n        \"in tempor sit\",\n        \"est sint culpa\"\n      ]\n    }\n  },\n  \"alias\": \"cillum\",\n  \"allowance\": -42625528.90390423,\n  \"apply_policies\": [\n    \"sed pariatur sit sint\",\n    \"cupidata\"\n  ],\n  \"apply_policy_id\": \"do aute mollit dolor exercitation\",\n  \"basic_auth_data\": {\n    \"hash_type\": \"dolor consequat eli\",\n    \"password\": \"in dolor\"\n  },\n  \"certificate\": \"non in voluptate\",\n  \"data_expires\": -74379106,\n  \"enable_detail_recording\": false,\n  \"expires\": -2279827,\n  \"hmac_enabled\": true,\n  \"hmac_string\": \"fugiat ad quis enim\",\n  \"id_extractor_deadline\": -82070203,\n  \"is_inactive\": false,\n  \"jwt_data\": {\n    \"secret\": \"lab\"\n  },\n  \"last_check\": 37990637,\n  \"last_updated\": \"dolor nostrud ea aute\",\n  \"meta_data\": {\n    \"ut78e\": {},\n    \"occaecat_fc\": {},\n    \"quis_f\": {}\n  },\n  \"monitor\": {\n    \"trigger_limits\": [\n      90440357.01980671,\n      49228609.87798926\n    ]\n  },\n  \"oauth_client_id\": \"exercit\",\n  \"oauth_keys\": {\n    \"velit_56\": \"officia ea commodo voluptate\",\n    \"exd_\": \"fugiat consectetur in nisi\"\n  },\n  \"org_id\": \"adipisicing est in\",\n  \"per\": -25832669.458350167,\n  \"quota_max\": 38611677,\n  \"quota_remaining\": 48315229,\n  \"quota_renewal_rate\": 45416127,\n  \"quota_renews\": 86643627,\n  \"rate\": 62145574.91332778,\n  \"session_lifetime\": -25221974,\n  \"throttle_interval\": 47204260.28000179,\n  \"throttle_retry_limit\": -7738028\n}"
+										}
+									]
+								},
+								{
+									"name": "Create an organisation key",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/org/keys/:keyID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"org",
+												"keys",
+												":keyID"
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "This work similar to Keys API except that Key ID is always equals Organisation ID"
+									},
+									"response": [
+										{
+											"name": "New Key added",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/org/keys/:keyID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"org",
+														"keys",
+														":keyID"
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"created\",\n  \"key\": \"{...KEY JSON definition...}\",\n  \"status\": \"ok\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update Organisation Key",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/tyk/org/keys/:keyID?reset_quota=1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"org",
+												"keys",
+												":keyID"
+											],
+											"query": [
+												{
+													"key": "reset_quota",
+													"value": "1",
+													"description": "Adding the `reset_quota` parameter and setting it to 1, will cause Tyk reset the organisations quota in the live quota manager, it is recommended to use this mechanism to reset organisation-level access if a monthly subscription is in place."
+												}
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "This work similar to Keys API except that Key ID is always equals Organisation ID\n\nFor Gateway v2.6.0 onwards, you can now set rate limits at the organisation level by using the following fields - allowance and rate. These are the number of allowed requests for the specified per value, and need to be set to the same value. If you don't want to have organisation level rate limiting, set `rate` or `per` to zero, or don't add them to your request."
+									},
+									"response": [
+										{
+											"name": "Key updated",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"quota_max\": 60,\n  \"quota_renews\": 1406121006,\n  \"quota_renewal_rate\": 60,\n  \"allowance\": 100,\n  \"rate\": 100,\n  \"per\": 5,\n  \"org_id\": \"53ac07777cbb8c2d53000002\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/tyk/org/keys/:keyID?reset_quota=1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"org",
+														"keys",
+														":keyID"
+													],
+													"query": [
+														{
+															"key": "reset_quota",
+															"value": "1"
+														}
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"updated\",\n  \"status\": \"ok\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete Organisation Key",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/org/keys/:keyID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"org",
+												"keys",
+												":keyID"
+											],
+											"variable": [
+												{
+													"key": "keyID",
+													"value": "minim dolor",
+													"description": "(Required) The Key ID"
+												}
+											]
+										},
+										"description": "Deleting a key will remove all limits from organisation. It does not affects regualar keys created within organisation."
+									},
+									"response": [
+										{
+											"name": "Key deleted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: apikey",
+														"key": "X-Tyk-Authorization",
+														"value": "<API Key>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/tyk/org/keys/:keyID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"tyk",
+														"org",
+														"keys",
+														":keyID"
+													],
+													"variable": [
+														{
+															"key": "keyID",
+															"value": "minim dolor",
+															"description": "(Required) The Key ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"action\": \"Key deleted\",\n  \"status\": \"ok\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "List Organisation Keys",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/org/keys",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"org",
+										"keys"
+									]
+								},
+								"description": "You can now set rate limits at the organisation level by using the following fields - allowance and rate. These are the number of allowed requests for the specified per value, and need to be set to the same value. If you don't want to have organisation level rate limiting, set 'rate' or 'per' to zero, or don't add them to your request."
+							},
+							"response": [
+								{
+									"name": "List of all API keys",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "X-Tyk-Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/tyk/org/keys",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tyk",
+												"org",
+												"keys"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"keys\": [\n    \"key1\",\n    \"key2\"\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Invalidate cache",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tyk/cache/:apiID",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tyk",
+								"cache",
+								":apiID"
+							],
+							"variable": [
+								{
+									"key": "apiID",
+									"value": "minim dolor",
+									"description": "(Required) The API ID"
+								}
+							]
+						},
+						"description": "Invalidate cache for the given API"
+					},
+					"response": [
+						{
+							"name": "Invalidate cache",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "X-Tyk-Authorization",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/cache/:apiID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"cache",
+										":apiID"
+									],
+									"variable": [
+										{
+											"key": "apiID",
+											"value": "minim dolor",
+											"description": "(Required) The API ID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"cache invalidated\",\n  \"status\": \"ok\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Check the Health of the Tyk Gateway",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tyk/hello",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tyk",
+								"hello"
+							]
+						},
+						"description": "From v2.7.5 you can now rename the `/hello`  endpoint by using the `health_check_endpoint_name` option\n\nReturns 200 response in case of success\n"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "X-Tyk-Authorization",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/hello",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"hello"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html"
+								}
+							],
+							"cookie": [],
+							"body": "Hello Tiki"
+						}
+					]
+				},
+				{
+					"name": "Check the Health of the API",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tyk/:listenPath/hello",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tyk",
+								":listenPath",
+								"hello"
+							],
+							"variable": [
+								{
+									"key": "listenPath",
+									"value": "minim dolor",
+									"description": "(Required) Listen path of loaded API"
+								}
+							]
+						},
+						"description": "Should point to API domain if it has its own"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "X-Tyk-Authorization",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/:listenPath/hello",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										":listenPath",
+										"hello"
+									],
+									"variable": [
+										{
+											"key": "listenPath",
+											"value": "minim dolor",
+											"description": "(Required) Listen path of loaded API"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html"
+								}
+							],
+							"cookie": [],
+							"body": "Hello Tiki"
+						}
+					]
+				},
+				{
+					"name": "get Schema",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tyk/schema?oasVersion=minim dolor",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tyk",
+								"schema"
+							],
+							"query": [
+								{
+									"key": "oasVersion",
+									"value": "minim dolor",
+									"description": "The OAS version"
+								}
+							]
+						},
+						"description": "Get OAS schema"
+					},
+					"response": [
+						{
+							"name": "OAS schema response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "X-Tyk-Authorization",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/schema?oasVersion=minim dolor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"schema"
+									],
+									"query": [
+										{
+											"key": "oasVersion",
+											"value": "minim dolor"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"status\": \"Success\",\n  \"schema\": \"<open api 3.0.3 schema>\"\n}"
+						},
+						{
+							"name": "The response when the parameter oasVersion is missing",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "X-Tyk-Authorization",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/schema?oasVersion=minim dolor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"schema"
+									],
+									"query": [
+										{
+											"key": "oasVersion",
+											"value": "minim dolor"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Should provide a value for parameter oasVersion\",\n  \"status\": \"Failed\"\n}"
+						},
+						{
+							"name": "The response when the requested OAS schema is not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "X-Tyk-Authorization",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tyk/schema?oasVersion=minim dolor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tyk",
+										"schema"
+									],
+									"query": [
+										{
+											"key": "oasVersion",
+											"value": "minim dolor"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Schema not found for version 5.0.0\",\n  \"status\": \"Failed\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Run batch request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/:listen_path/tyk/batch",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						":listen_path",
+						"tyk",
+						"batch"
+					],
+					"variable": [
+						{
+							"key": "listen_path",
+							"value": "minim dolor",
+							"description": "(Required) API listen path"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "apiStatusMessage represents an API status message",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "X-Tyk-Authorization",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/:listen_path/tyk/batch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":listen_path",
+								"tyk",
+								"batch"
+							],
+							"variable": [
+								{
+									"key": "listen_path",
+									"value": "minim dolor",
+									"description": "(Required) API listen path"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-Tyk-Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "<API Key>",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost/",
+			"type": "string"
+		}
+	]
+}

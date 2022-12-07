@@ -22,15 +22,6 @@ services:
     networks:
       - tyk
 
-  dashboard:
-    image: tykio/tyk-dashboard:v4.3
-    ports:
-      - 3000:3000
-    depends_on:
-      - gateway
-    networks:
-      - tyk
-
   redis:
     image: redis:6.2.7-alpine
     # ports:
