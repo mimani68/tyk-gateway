@@ -1,0 +1,59 @@
+{
+    "name": "shop",
+    "api_id": "shop-1",
+    "slug": "test",
+    "org_id": "default",
+    "definition": {
+        "location": "header",
+        "key": "version"
+    },
+    "use_keyless": true,
+    "response_processors": [{
+        "name": "response_body_transform",
+        "options": {}
+    }],
+    "version_data": {
+        "not_versioned": true,
+        "versions": {
+            "Default": {
+                "name": "default",
+                "use_extended_paths": true,
+                "extended_paths": {
+                    "transform_headers": [{
+                        "delete_headers": ["authorization"],
+                        "add_headers": {
+                            "x-widgets-secret": "the-secret-widget-key-is-secret"
+                        },
+                        "path": "/get",
+                        "method": "GET"
+                    }],
+                    "transform_response": [{
+                        "path": "/get",
+                        "method": "GET",
+                        "template_data": {
+                            "input_type": "json",
+                            "template_mode": "blob",
+                            "template_source": "eyJtZXNzYWdlIjoic2FsYW0ifQo="
+                        }
+                    }]
+                },
+                "global_headers": {
+                    "X-App": "shop",
+                    "X-Request-ID": "salam"
+                }
+            }
+        }
+    },
+    "proxy": {
+        "listen_path": "/shop",
+        "target_url": "http://httpbin.org",
+        "strip_listen_path": true
+    },
+    "disable_rate_limit": true,
+    "cache_options": {
+        "enable_cache": true
+    },
+    "global_rate_limit": {
+        "rate": 2
+    }
+}

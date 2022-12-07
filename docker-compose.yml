@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+
+  gateway:
+    image: docker.tyk.io/tyk-gateway/tyk-gateway:v4.1.0
+    ports:
+      - 8080:8080
+    volumes:
+      - ./config/tyk.standalone.conf:/opt/tyk-gateway/tyk.conf:ro
+      - ./apps:/opt/tyk-gateway/apps
+      - ./middleware:/opt/tyk-gateway/middleware
+      - ./event_handlers:/opt/tyk-gateway/event_handlers
+      - ./coprocess:/opt/tyk-gateway/coprocess
+      - ./templates:/opt/tyk-gateway/templates
+      - ./policies:/opt/tyk-gateway/policies
+      - ./certs:/opt/tyk-gateway/certs
+    environment:
+      - TYK_GW_SECRET=Lina(3uW2oi6wAh
+    depends_on:
+      - redis
+    networks:
+      - tyk
+
+  dashboard:
+    image: tykio/tyk-dashboard:v4.3
+    ports:
+      - 3000:3000
+    depends_on:
+      - gateway
+    networks:
+      - tyk
+
+  redis:
+    image: redis:6.2.7-alpine
+    # ports:
+    #   - 6379:6379
+    networks:
+      - tyk
+
+networks:
+  tyk:
