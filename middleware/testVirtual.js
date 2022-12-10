@@ -1,7 +1,7 @@
 function thisTest(request, session, config) {
 	// Set up a response object
 	var response = {
-		Body: ""
+		Body: "",
 		Headers: {
 			"test": "virtual-header-1", 
 			"test-2": "virtual-header-2",

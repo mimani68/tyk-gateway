@@ -39,9 +39,8 @@
                         "path": "/get",
                         "method": "GET",
                         "template_data": {
-                            "input_type": "json",
                             "template_mode": "file",
-                            "template_source": "./templates/httpmock.json"
+                            "template_source": "./templates/httpmock.tmpl"
                         }
                     }]
                 },

@@ -1,0 +1,18 @@
+{
+    "message": "salam",
+    "api_id": "{{ .Meta }}",
+    "meta": "{{ ._tyk_meta }}",
+    "context": "{{ ._tyk_context }}",
+    "user-id": "{{._tyk_meta.uid}}",
+    "server": "{{ .servers }}",
+    "tid": "{{ uuidv4 }}",
+    "cid": "{{ uuidv4 }}",
+    "data": {
+        "event": "{{.Type}}",
+        "message": "{{.Meta.Message}}",
+        "org": "{{.Meta.OrgID}}",
+        "key": "{{.Meta.Key}}",
+        "trigger_limit": "{{.Meta.TriggerLimit}}"
+    }
+    
+}

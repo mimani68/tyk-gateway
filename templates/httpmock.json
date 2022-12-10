@@ -1,8 +1,0 @@
-{
-    "message": "salam",
-    "api_id": "{{ toJson .Meta }}",
-    "meta": "{{ toJson ._tyk_meta }}",
-    "context": "{{ toJson ._tyk_context }}",
-    "tid": "{{ uuidv4 }}",
-    "cid": "{{ uuidv4 }}"
-}
