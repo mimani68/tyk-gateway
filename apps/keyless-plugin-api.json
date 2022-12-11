@@ -28,7 +28,7 @@
     "driver": "otto",
     "proxy": {
         "listen_path": "/keyless-test/",
-        "target_url": "http://echo",
+        "target_url": "http://httpbin/get",
         "strip_listen_path": true
     }
 }
