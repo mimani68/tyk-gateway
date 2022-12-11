@@ -22,6 +22,15 @@ services:
     networks:
       - tyk
 
+  echo:
+    image: kennethreitz/httpbin
+    ports:
+      - 80:80
+    # environment:
+    #   - TYK_GW_SECRET=Lina(3uW2oi6wAh
+    networks:
+      - tyk
+
   redis:
     image: redis:6.2.7-alpine
     # ports:

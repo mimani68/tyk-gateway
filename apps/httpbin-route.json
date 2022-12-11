@@ -1,13 +1,16 @@
 {
-    "name": "shop",
-    "api_id": "shop-1",
-    "slug": "test",
+    "name": "httpbin",
+    "api_id": "httpbin-1",
+    "slug": "",
     "org_id": "default",
+
     "definition": {
         "location": "header",
         "key": "version"
     },
+
     "use_keyless": true,
+
     "response_processors": [{
         "name": "response_body_transform",
         "options": {}
@@ -45,22 +48,22 @@
                     }]
                 },
                 "global_headers": {
-                    "X-App": "shop",
+                    "X-App": "httpbin",
                     "X-Request-ID": "salam"
                 }
             }
         }
     },
+
     "proxy": {
-        "listen_path": "/shop",
-        "target_url": "http://httpbin.org",
+        "listen_path": "/httpbin/route",
+        "target_url": "http://echo",
         "strip_listen_path": true
     },
-    "disable_rate_limit": true,
-    "cache_options": {
-        "enable_cache": true
-    },
+
+    "disable_rate_limit": false,
     "global_rate_limit": {
-        "rate": 2
+        "rate": 20,
+        "per": 60
     }
 }

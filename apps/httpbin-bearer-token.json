@@ -1,0 +1,24 @@
+{
+  "name": "httpbin.org - Bearer Token Auth",
+  "api_id": "httpbin-4",
+  "slug": "",
+  "org_id": "default",
+  "active": false,
+
+  "version_data": {
+    "not_versioned": true,
+    "versions": {
+      "Default": {
+        "name": "Default",
+        "use_extended_paths": true
+      }
+    }
+  },
+
+  "proxy": {
+    "listen_path": "/httpbin/bearer",
+    "target_url": "http://echo",
+    "strip_listen_path": true
+  }
+
+}

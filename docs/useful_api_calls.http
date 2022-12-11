@@ -56,4 +56,75 @@ X-Tyk-Authorization: Lina(3uW2oi6wAh
 ###
 # Retrive single service via API gateway
 ###
-http://localhost:8080/shop/get?help=true
+http://localhost:8080/httpbin/route/get?help=true
+
+###
+# Retrive data while cache had applied to
+###
+http :8080/httpbin/cache/get X-User:17352
+
+###
+# basic auth mechanism
+###
+printf '{
+    "allowance": 1000,
+    "rate": 1000,
+    "per": 1,
+    "expires": -1,
+    "quota_max": -1,
+    "org_id": "default",
+    "quota_renews": 1449051461,
+    "quota_remaining": -1,
+    "quota_renewal_rate": 60,
+    "access_rights": {
+        "<api-id>": {
+            "api_id": "<api-id>",
+            "api_name": "<api-name>",
+            "versions": [
+                "default"
+            ]
+        }
+    },
+    "meta_data": {},
+    "basic_auth_data": {
+        "password": "bar"
+    }
+}'| http POST 'http://localhost:8080/tyk/keys/<username>' \
+ Content-Type:'application/json' \
+ Accept:'application/json' \
+ X-Tyk-Authorization:'Lina(3uW2oi6wAh'
+
+## -> Retrive protected route
+http :8080/httpbin/basic/get "Authorization:Basic c3RhZmY6YmFy"
+
+###
+# bearer auth mechanism
+###
+printf '{
+    "allowance": 1000,
+    "rate": 1000,
+    "per": 1,
+    "expires": -1,
+    "quota_max": -1,
+    "org_id": "default",
+    "quota_renews": 1449051461,
+    "quota_remaining": -1,
+    "quota_renewal_rate": 60,
+    "access_rights": {
+        "<api-id>": {
+            "api_id": "<api-id>",
+            "api_name": "<api-name>",
+            "allowed_urls": null,
+            "versions": [
+                "default"
+            ]
+        }
+    },
+    "meta_data": {}
+}'| http  POST 'http://localhost:8080/tyk/keys' \
+ Content-Type:'application/json' \
+ Accept:'application/json' \
+ X-Tyk-Authorization:'Lina(3uW2oi6wAh'
+
+## -> Retrive protected route
+http :8080/httpbin/bearer/get "Authorization:Bearer default084d14083c0f426c90ac3ad9c79e073b"

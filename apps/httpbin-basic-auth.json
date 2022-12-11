@@ -1,0 +1,39 @@
+{
+    "name": "httpbin.org - Basic Auth",
+    "api_id": "httpbin-3",
+    "slug": "",
+    "org_id": "default",
+    "active": true,
+
+    "definition": {
+        "location": "header",
+        "key": "version"
+    },
+
+    "use_keyless": false,
+    "use_basic_auth": true,
+    "auth": {
+        "auth_header_name": "authorization",
+        "use_param": false
+    },
+
+    "response_processors": [{
+        "name": "response_body_transform",
+        "options": {}
+    }],
+
+    "version_data": {
+        "not_versioned": true,
+        "versions": {
+            "Default": {
+                "name": "default"
+            }
+        }
+    },
+
+    "proxy": {
+        "listen_path": "/httpbin/basic",
+        "target_url": "http://echo",
+        "strip_listen_path": true
+    }
+}
